@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { IdeaDTO } from './idea.dto';
 
 import { IdeaEntity } from './idea.entity';
 
@@ -15,7 +16,7 @@ export class IdeaService {
     return await this.ideaRepository.find();
   }
 
-  async create(data) {
+  async create(data: IdeaDTO) {
     const idea = await this.ideaRepository.create(data);
 
     await this.ideaRepository.save(idea);
@@ -28,7 +29,7 @@ export class IdeaService {
     });
   }
 
-  async update(id: string, data) {
+  async update(id: string, data: Partial<IdeaDTO>) {
     await this.ideaRepository.update({ id }, data);
     return await this.ideaRepository.findOne({ id });
   }
