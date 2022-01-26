@@ -16,4 +16,13 @@ content-type: application/json
   "description": "test"
 }
 
+### Create idea
+PUT http://localhost:4000/idea/d1dd6852-91e2-4c40-b79a-187ea37518ad
+content-type: application/json
+
+{
+  "idea": "test",
+  "description": "test"
+}
+
 
