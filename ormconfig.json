@@ -7,5 +7,5 @@
   "database": "ideass",
   "synchronize": true,
   "logging": true,
-  "entities": ["src/modules/**/*.entity.{ts,js}"]
+  "entities": ["dist/**/*.entity.js"]
 }
