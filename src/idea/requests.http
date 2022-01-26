@@ -1,0 +1,19 @@
+### Find a particular idea with a given ID
+GET http://localhost:4000/idea/d1dd6852-91e2-4c40-b79a-187ea37518ad
+
+### Find all ideas
+GET http://localhost:4000/idea
+
+### Delete one idea
+DELETE  http://localhost:4000/idea/d1dd6852-91e2-4c40-b79a-187ea37518ad
+
+### Create idea
+POST http://localhost:4000/idea
+content-type: application/json
+
+{
+  "idea": "test",
+  "description": "test"
+}
+
+
