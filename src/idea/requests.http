@@ -22,7 +22,6 @@ content-type: application/json
 
 {
   "idea": "test",
-  "description": "test"
 }
 
 
