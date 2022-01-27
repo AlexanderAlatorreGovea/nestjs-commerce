@@ -32,18 +32,21 @@ export class IdeaService {
       this.throwException();
     }
 
+
     return idea;
   }
 
   async update(id: string, data: Partial<IdeaDTO>) {
-    const idea = await this.ideaRepository.findOne({ where: { id } });
+    let idea = await this.ideaRepository.findOne({ where: { id } });
 
     if (!idea) {
       this.throwException();
     }
 
-    await this.ideaRepository.update({ id }, data);
-    
+    await this.ideaRepository.update({ id }, data)
+
+    idea = await this.ideaRepository.findOne({ where: { id } })
+
     return idea
   }
 

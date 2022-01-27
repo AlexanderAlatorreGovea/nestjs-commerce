@@ -21,7 +21,7 @@ PUT http://localhost:4000/idea/ce3a426e-4cf7-48d6-9c5a-4ece74c5c255
 content-type: application/json
 
 {
-    "description": "test2"
+    "description": "test3"
 }
 
 
