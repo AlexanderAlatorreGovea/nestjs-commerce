@@ -7,15 +7,15 @@ import {
   Post,
   Put,
   UsePipes,
-  ValidationPipe,
+  ValidationPipe
 } from '@nestjs/common';
-
 import { IdeaDTO } from './idea.dto';
 import { IdeaService } from './idea.service';
 
+
 @Controller('idea')
 export class IdeaController {
-  constructor(private ideaService: IdeaService) {}
+  constructor(private ideaService: IdeaService) { }
 
   @Get()
   showAllIdeas() {

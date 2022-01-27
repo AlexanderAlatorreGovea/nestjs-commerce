@@ -10,7 +10,7 @@ export class IdeaService {
   constructor(
     @InjectRepository(IdeaEntity)
     private ideaRepository: Repository<IdeaEntity>,
-  ) {}
+  ) { }
 
   async showAll() {
     return await this.ideaRepository.find();
@@ -42,6 +42,8 @@ export class IdeaService {
       this.throwException();
     }
 
+    await this.ideaRepository.update({ id }, data);
+    
     return idea
   }
 
