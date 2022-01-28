@@ -13,7 +13,7 @@ import { IdeaDTO } from './idea.dto';
 import { IdeaService } from './idea.service';
 
 
-@Controller('idea')
+@Controller('api/ideas')
 export class IdeaController {
   constructor(private ideaService: IdeaService) { }
 
