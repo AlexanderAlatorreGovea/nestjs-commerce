@@ -8,6 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from 'shared/auth.guard';
+import { User } from './user.decorator';
 import { UserDTO } from './user.dto';
 import { UserService } from './user.service';
 
@@ -17,7 +18,7 @@ export class UserController {
 
   @Get('api/users')
   @UseGuards(new AuthGuard())
-  showAllUsers() {
+  showAllUsers(@User() user) {
     return this.userService.showAll();
   }
 
