@@ -1,0 +1,17 @@
+### Find all users
+POST http://localhost:4000/login
+content-type: application/json
+
+{
+  "username": "username",
+  "password": "password"
+}
+
+### Register
+POST http://localhost:4000/register
+content-type: application/json
+
+{
+  "username": "username",
+  "password": "password"
+}
