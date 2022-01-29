@@ -3,11 +3,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UserResponseObject } from './user.dto';
+import { IdeaEntity } from 'idea/idea.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -25,6 +29,13 @@ export class UserEntity {
 
   @Column('text')
   password: string;
+
+  @OneToMany(type => IdeaEntity, idea => idea.author, { cascade: true })
+  ideas: IdeaEntity[];
+
+  @ManyToMany(type => IdeaEntity, { cascade: true })
+  @JoinTable()
+  bookmarks: IdeaEntity[];
 
   @BeforeInsert()
   async hashPassword() {

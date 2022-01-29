@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   Column,
+  ManyToOne,
 } from 'typeorm';
+import { UserEntity } from 'user/user.entity';
 
 @Entity('idea')
 export class IdeaEntity {
@@ -18,4 +20,7 @@ export class IdeaEntity {
 
   @Column('text')
   idea: string;
+
+  @ManyToOne(type => UserEntity, author => author.ideas)
+  author: UserEntity;
 }
