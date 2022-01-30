@@ -33,10 +33,6 @@ export class UserEntity {
   @OneToMany(type => IdeaEntity, idea => idea.author, { cascade: true })
   ideas: IdeaEntity[];
 
-  @ManyToMany(type => IdeaEntity, { cascade: true })
-  @JoinTable()
-  bookmarks: IdeaEntity[];
-
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
@@ -57,16 +53,16 @@ export class UserEntity {
     return await bcrypt.compare(attempt, this.password);
   }
 
-  private get token() {
+  private get token(): string {
     const { id, username } = this;
 
-    const data = {
-      id,
-      username,
-    };
-    const { SECRET } = process.env;
-    const EXPIRATION_DEADLINE = { expiresIn: '7d' };
-
-    return jwt.sign(data, SECRET, EXPIRATION_DEADLINE);
+    return jwt.sign(
+      {
+        id,
+        username,
+      },
+      process.env.SECRET,
+      { expiresIn: '7d' },
+    );
   }
 }

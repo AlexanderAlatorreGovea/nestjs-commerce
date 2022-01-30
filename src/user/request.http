@@ -1,14 +1,14 @@
 ### Find all users
 GET http://localhost:4000/api/users
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU0ZWRiZDliLWU4MDAtNGQ5NS04NGQxLTM5N2Y2M2ZkZjEzMCIsInVzZXJuYW1lIjoidXNlcm5hbWUyIiwiaWF0IjoxNjQzNDk2MTU1LCJleHAiOjE2NDQxMDA5NTV9.lOyS1e4rbuCTL5QzguFNIyd9BPdFh1s87quoUdVLRJs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyOTEzYjMyLWU5MWEtNDgyNi04MzM5LTg1NTIzYzI1ODlmYiIsInVzZXJuYW1lIjoidXNlcm5hbWU0IiwiaWF0IjoxNjQzNTEyODE1LCJleHAiOjE2NDQxMTc2MTV9.wG4j74CsteThkWUcKRgFjsuH_mC6NZkx-FCowGCD1p4
 
 ### login user
 POST http://localhost:4000/login
 content-type: application/json
 
 {
-  "username": "username",
+  "username": "username43",
   "password": "password"
 }
 
@@ -17,6 +17,6 @@ POST http://localhost:4000/register
 content-type: application/json
 
 {
-  "username": "username2",
+  "username": "username43",
   "password": "password"
 }

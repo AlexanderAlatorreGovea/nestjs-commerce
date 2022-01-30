@@ -6,6 +6,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { decode } from 'querystring';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -22,21 +23,20 @@ export class AuthGuard implements CanActivate {
 
   async validateToken(auth: string) {
     if (auth.split(' ')[0] !== 'Bearer') {
-      const ERROR = 'Invalid Token';
-      throw new HttpException(ERROR, HttpStatus.FORBIDDEN);
+      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
-
     const token = auth.split(' ')[1];
-    const { SECRET } = process.env;
 
     try {
-      const decoded = jwt.verify(token, SECRET);
-
+      const decoded: string | jwt.JwtPayload = await jwt.verify(
+        token,
+        process.env.SECRET,
+      );
+      
       return decoded;
-    } catch (error) {
-      const message = 'Token error: ' + (error.message || error.name);
-
-      throw new HttpException(message, HttpStatus.FORBIDDEN);
+    } catch (err) {
+      const message = 'Token error: ' + (err.message || err.name);
+      throw new HttpException(message, HttpStatus.UNAUTHORIZED);
     }
   }
 }

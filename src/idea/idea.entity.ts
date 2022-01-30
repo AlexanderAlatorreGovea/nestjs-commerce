@@ -26,9 +26,6 @@ export class IdeaEntity {
   @Column('text')
   idea: string;
 
-  @OneToMany((type) => IdeaEntity, (idea) => idea.author)
-  ideas: IdeaEntity[];
-
   @ManyToOne((type) => UserEntity, (author) => author.ideas)
   author: UserEntity;
 }

@@ -6,26 +6,29 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from 'shared/auth.guard';
+import { User } from 'user/user.decorator';
 import { IdeaDTO } from './idea.dto';
 import { IdeaService } from './idea.service';
 
-
 @Controller('api/ideas')
 export class IdeaController {
-  constructor(private ideaService: IdeaService) { }
-
+  constructor(private ideaService: IdeaService) {}
+ 
   @Get()
   showAllIdeas() {
     return this.ideaService.showAll();
   }
 
   @Post()
+  @UseGuards(new AuthGuard())
   @UsePipes(new ValidationPipe())
-  createIdea(@Body() data: IdeaDTO) {
-    return this.ideaService.create(data);
+  createIdea(@User('id') user, @Body() body: IdeaDTO) {
+    return this.ideaService.create(user, body);
   }
 
   @Get(':id')
