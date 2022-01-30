@@ -18,7 +18,7 @@ import { IdeaService } from './idea.service';
 @Controller('api/ideas')
 export class IdeaController {
   constructor(private ideaService: IdeaService) {}
- 
+
   @Get()
   showAllIdeas() {
     return this.ideaService.showAll();
@@ -27,8 +27,9 @@ export class IdeaController {
   @Post()
   @UseGuards(new AuthGuard())
   @UsePipes(new ValidationPipe())
-  createIdea(@User('id') user, @Body() body: IdeaDTO) {
-    return this.ideaService.create(user, body);
+  createIdea(@User(['id']) user, @Body() body: IdeaDTO) {
+    const { id, ...rest } = user;
+    return this.ideaService.create(id, body);
   }
 
   @Get(':id')
