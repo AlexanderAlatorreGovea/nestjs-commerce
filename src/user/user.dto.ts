@@ -8,7 +8,7 @@ export class UserDTO {
   password: string;
 }
 
-export class UserResponseObject {
+export class UserResponse {
   id: string;
   username: string;
   created: Date;
