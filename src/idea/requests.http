@@ -3,14 +3,14 @@ GET http://localhost:4000/api/ideas/ce3a426e-4cf7-48d6-9c5a-4ece74c5c255
 
 ### Find all ideas
 GET http://localhost:4000/api/ideas
-
+ 
 ### Delete one idea
 DELETE  http://localhost:4000/api/ideas/ce3a426e-4cf7-48d6-9c5a-4ece74c5c255
-
+ 
 ### Create idea
 POST http://localhost:4000/api/ideas
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlYTQ4NTcwLWYwYzgtNGIwYy04YzllLTk5OGJkMDhmN2QxZCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MyIsImlhdCI6MTY0MzUxMzczOCwiZXhwIjoxNjQ0MTE4NTM4fQ.wrYDlqvWT2wcqec2RW3uJ9Xoyllls0eAERzhu91QSGU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
 {
   "idea": "test",
@@ -18,8 +18,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlYTQ4NTcwL
 }
 
 ### Create idea
-PUT http://localhost:4000/api/ideas/ce3a426e-4cf7-48d6-9c5a-4ece74c5c255
+PUT http://localhost:4000/api/ideas/e1b7d00d-605e-4c31-9227-0ebb175a4d5a
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
 {
     "description": "test3"

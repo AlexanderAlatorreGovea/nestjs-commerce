@@ -55,11 +55,16 @@ export class IdeaService {
     userId: string,
     data: Partial<IdeaDTO>,
   ): Promise<IdeaResponse> {
-    let idea = await this.ideaRepository.findOne({ where: { id } });
+    let idea = await this.ideaRepository.findOne({
+      where: { id },
+      relations: ['author'],
+    });
 
     if (!idea) {
       this.throwException();
     }
+
+    this.ensureOwnership(idea, userId)
 
     await this.ideaRepository.update({ id }, data);
     idea = await this.ideaRepository.findOne({ where: { id } });
@@ -72,6 +77,7 @@ export class IdeaService {
   async destroy(id: string, userId: string) {
     const idea = await this.ideaRepository.findOne({
       where: { id },
+      relations: ['author'],
     });
 
     if (!idea) {
@@ -96,5 +102,10 @@ export class IdeaService {
     return sanitizedResponse;
   }
 
-  private ensureOwnership(idea: IdeaEntity, userId: string) {}
+  private ensureOwnership(idea: IdeaEntity, userId: string) {
+    const { id } = idea.author;
+    if (id !== userId) {
+      throw new HttpException('Incorrect User', HttpStatus.UNAUTHORIZED);
+    }
+  }
 }
