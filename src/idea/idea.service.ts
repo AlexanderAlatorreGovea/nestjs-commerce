@@ -19,9 +19,9 @@ export class IdeaService {
     const ideas = await this.ideaRepository.find({
       relations: ['author'],
     });
-    const ideasWithOmittedUserToken = ideas.map((idea) =>
-      this.toResponseObject(idea),
-    );
+    const ideasWithOmittedUserToken = ideas.map((idea) => {
+      return this.ideaToResponseObject(idea);
+    });
 
     return ideasWithOmittedUserToken;
   }
@@ -32,7 +32,7 @@ export class IdeaService {
 
     await this.ideaRepository.save(idea);
 
-    return this.toResponseObject(idea);
+    return this.ideaToResponseObject(idea);
   }
 
   async read(id: string): Promise<IdeaResponse> {
@@ -45,7 +45,7 @@ export class IdeaService {
       this.throwException();
     }
 
-    const ideaWithOmittedUserToken = this.toResponseObject(idea);
+    const ideaWithOmittedUserToken = this.ideaToResponseObject(idea);
 
     return ideaWithOmittedUserToken;
   }
@@ -60,7 +60,7 @@ export class IdeaService {
     await this.ideaRepository.update({ id }, data);
     idea = await this.ideaRepository.findOne({ where: { id } });
 
-    const ideaWithOmittedUserToken = this.toResponseObject(idea);
+    const ideaWithOmittedUserToken = this.ideaToResponseObject(idea);
 
     return ideaWithOmittedUserToken;
   }
@@ -81,9 +81,14 @@ export class IdeaService {
     throw new HttpException('Not found', HttpStatus.NOT_FOUND);
   }
 
-  private toResponseObject(idea: IdeaEntity): IdeaResponse {
-    const author = idea.author.toResponseObject(false);
+  private ideaToResponseObject(idea: IdeaEntity): IdeaResponse {
+    const author = idea.author ? idea.author.toResponseObject(false) : null;
 
-    return { ...idea, author };
+    const sanitizedResponse: any = {
+      ...idea,
+      author,
+    };
+
+    return sanitizedResponse;
   }
 }
