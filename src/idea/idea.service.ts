@@ -50,7 +50,11 @@ export class IdeaService {
     return ideaWithOmittedUserToken;
   }
 
-  async update(id: string, data: Partial<IdeaDTO>): Promise<IdeaResponse> {
+  async update(
+    id: string,
+    userId: string,
+    data: Partial<IdeaDTO>,
+  ): Promise<IdeaResponse> {
     let idea = await this.ideaRepository.findOne({ where: { id } });
 
     if (!idea) {
@@ -65,7 +69,7 @@ export class IdeaService {
     return ideaWithOmittedUserToken;
   }
 
-  async destroy(id: string) {
+  async destroy(id: string, userId: string) {
     const idea = await this.ideaRepository.findOne({
       where: { id },
     });
