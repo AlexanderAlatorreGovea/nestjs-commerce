@@ -19,9 +19,9 @@ export class IdeaService {
     const ideas = await this.ideaRepository.find({
       relations: ['author'],
     });
-    const ideasWithOmittedUserToken = ideas.map((idea) => {
-      return this.ideaToResponseObject(idea);
-    });
+    const ideasWithOmittedUserToken = ideas.map((idea) =>
+      this.ideaToResponseObject(idea),
+    );
 
     return ideasWithOmittedUserToken;
   }
@@ -88,11 +88,13 @@ export class IdeaService {
   private ideaToResponseObject(idea: IdeaEntity): IdeaResponse {
     const author = idea.author ? idea.author.toResponseObject(false) : null;
 
-    const sanitizedResponse: any = {
+    const sanitizedResponse = {
       ...idea,
       author,
-    };
+    } as IdeaResponse;
 
     return sanitizedResponse;
   }
+
+  private ensureOwnership(idea: IdeaEntity, userId: string) {}
 }
