@@ -197,16 +197,25 @@ export class IdeaService {
   }
 
   private async vote(idea: IdeaEntity, user: UserEntity, vote: Votes) {
-    const opposite = vote === Votes.UP ? Votes.DOWN : Votes.UP;
-    if (
-      idea[opposite].filter((voter) => voter.id === user.id).length > 0 ||
-      idea[vote].filter((voter) => voter.id === user.id).length > 0
-    ) {
-      idea[opposite] = idea[opposite].filter((voter) => voter.id !== user.id);
+    const oppositeVote = vote === Votes.UP ? Votes.DOWN : Votes.UP;
+    const userUpVoted = idea[vote].filter(
+      (voter) => voter.id === user.id,
+    ).length;
+    const userDownVoted = idea[oppositeVote].filter(
+      (voter) => voter.id === user.id,
+    ).length;
+    const userHasVoted = userDownVoted || userUpVoted;
+
+    if (userHasVoted) {
+      idea[oppositeVote] = idea[oppositeVote].filter(
+        (voter) => voter.id !== user.id,
+      );
       idea[vote] = idea[vote].filter((voter) => voter.id !== user.id);
+
       await this.ideaRepository.save(idea);
-    } else if (idea[vote].filter((voter) => voter.id === user.id).length < 1) {
+    } else if (!userUpVoted) {
       idea[vote].push(user);
+
       await this.ideaRepository.save(idea);
     } else {
       throw new HttpException('Unable to cast vote', HttpStatus.BAD_REQUEST);
