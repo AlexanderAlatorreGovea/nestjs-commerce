@@ -64,10 +64,13 @@ export class IdeaService {
       this.throwException();
     }
 
-    this.ensureOwnership(idea, userId)
+    this.ensureOwnership(idea, userId);
 
     await this.ideaRepository.update({ id }, data);
-    idea = await this.ideaRepository.findOne({ where: { id } });
+    idea = await this.ideaRepository.findOne({
+      where: { id },
+      relations: ['author'],
+    });
 
     const ideaWithOmittedUserToken = this.ideaToResponseObject(idea);
 
@@ -84,7 +87,7 @@ export class IdeaService {
       this.throwException();
     }
 
-    return idea;
+    return this.ideaToResponseObject(idea);
   }
 
   throwException() {

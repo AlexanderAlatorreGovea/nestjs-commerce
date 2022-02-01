@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { IdeaEntity } from 'idea/idea.entity';
 
 export class UserDTO {
   @IsNotEmpty()
@@ -12,5 +13,10 @@ export class UserResponse {
   id: string;
   username: string;
   created: Date;
+  token?: string;
+}
+
+export class UserResponseWithAddedProperties extends UserResponse {
+  ideas?: IdeaEntity[];
   token?: string;
 }

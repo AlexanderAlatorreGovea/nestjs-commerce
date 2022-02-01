@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import { UserResponse } from './user.dto';
+import { UserResponse, UserResponseWithAddedProperties } from './user.dto';
 import { IdeaEntity } from 'idea/idea.entity';
 
 @Entity('user')
@@ -30,7 +30,7 @@ export class UserEntity {
   @Column('text')
   password: string;
 
-  @OneToMany(type => IdeaEntity, idea => idea.author, { cascade: true })
+  @OneToMany((type) => IdeaEntity, (idea) => idea.author, { cascade: true })
   ideas: IdeaEntity[];
 
   @BeforeInsert()
@@ -40,10 +40,18 @@ export class UserEntity {
 
   toResponseObject(showToken: boolean = true): UserResponse {
     const { id, created, username, token } = this;
-    const responseObject: UserResponse = { id, created, username };
+    const responseObject: UserResponseWithAddedProperties = {
+      id,
+      created,
+      username,
+    };
 
     if (showToken) {
       responseObject.token = token;
+    }
+
+    if (this.ideas) {
+      responseObject.ideas = this.ideas;
     }
 
     return responseObject;
