@@ -16,4 +16,6 @@ export class IdeaResponse {
   updated: Date;
   description: string;
   idea: string;
+  upvotes?: UserResponse[];
+  downvotes?: UserResponse[];
 }

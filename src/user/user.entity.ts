@@ -38,6 +38,12 @@ export class UserEntity {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
+  @ManyToMany((type) => IdeaEntity, {
+    cascade: true,
+  })
+  @JoinTable()
+  bookmarsk: IdeaEntity;
+
   toResponseObject(showToken: boolean = true): UserResponse {
     const { id, created, username, token } = this;
     const responseObject: UserResponseWithAddedProperties = {
