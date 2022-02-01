@@ -1,5 +1,5 @@
 ### Find a particular idea with a given ID
-GET http://localhost:4000/api/ideas/7944df83-5ead-4d0d-bac7-2283d47d6ccd
+GET http://localhost:4000/api/ideas/a00e5f47-e5aa-4afe-b94b-3e4a0d00d397
 
 ### Find all ideas
 GET http://localhost:4000/api/ideas
@@ -10,7 +10,7 @@ DELETE  http://localhost:4000/api/ideas/e1b7d00d-605e-4c31-9227-0ebb175a4d5a
 ### Create idea
 POST http://localhost:4000/api/ideas/
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlYTQ4NTcwLWYwYzgtNGIwYy04YzllLTk5OGJkMDhmN2QxZCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MyIsImlhdCI6MTY0MzY5MjAyMCwiZXhwIjoxNjQ0Mjk2ODIwfQ.eUwWaAYBC0aB3QXOXqIzXaVJeNIBpXi1liXU_aTTjkY
 
 {
   "idea": "test",
@@ -35,3 +35,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3L
 DELETE http://localhost:4000/api/ideas/7944df83-5ead-4d0d-bac7-2283d47d6ccd/boomark
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
+
+### Upvote idea
+POST http://localhost:4000/api/ideas/a00e5f47-e5aa-4afe-b94b-3e4a0d00d397/downvote
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlYTQ4NTcwLWYwYzgtNGIwYy04YzllLTk5OGJkMDhmN2QxZCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MyIsImlhdCI6MTY0MzY5MjAyMCwiZXhwIjoxNjQ0Mjk2ODIwfQ.eUwWaAYBC0aB3QXOXqIzXaVJeNIBpXi1liXU_aTTjkY

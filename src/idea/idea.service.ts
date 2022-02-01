@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Votes } from 'shared/votes.enum';
 import { Repository } from 'typeorm';
 import { UserEntity } from 'user/user.entity';
 import { IdeaDTO, IdeaResponse } from './idea.dto';
@@ -171,5 +172,46 @@ export class IdeaService {
     }
 
     return user.toResponseObject();
+  }
+
+  async upvote(id: string, userId: string) {
+    let idea = await this.ideaRepository.findOne({
+      where: { id },
+      relations: ['author', 'upvotes', 'downvotes'],
+    });
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    idea = await this.vote(idea, user, Votes.UP);
+
+    return this.ideaToResponseObject(idea);
+  }
+
+  async downvote(id: string, userId: string) {
+    let idea = await this.ideaRepository.findOne({
+      where: { id },
+      relations: ['author', 'upvotes', 'downvotes'],
+    });
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    idea = await this.vote(idea, user, Votes.DOWN);
+
+    return this.ideaToResponseObject(idea);
+  }
+
+  private async vote(idea: IdeaEntity, user: UserEntity, vote: Votes) {
+    const opposite = vote === Votes.UP ? Votes.DOWN : Votes.UP;
+    if (
+      idea[opposite].filter((voter) => voter.id === user.id).length > 0 ||
+      idea[vote].filter((voter) => voter.id === user.id).length > 0
+    ) {
+      idea[opposite] = idea[opposite].filter((voter) => voter.id !== user.id);
+      idea[vote] = idea[vote].filter((voter) => voter.id !== user.id);
+      await this.ideaRepository.save(idea);
+    } else if (idea[vote].filter((voter) => voter.id === user.id).length < 1) {
+      idea[vote].push(user);
+      await this.ideaRepository.save(idea);
+    } else {
+      throw new HttpException('Unable to cast vote', HttpStatus.BAD_REQUEST);
+    }
+
+    return idea;
   }
 }

@@ -58,11 +58,15 @@ export class IdeaController {
 
   @Post(':id/upvote')
   @UseGuards(new AuthGuard())
-  upVoteIdeas(@Param('id') id: string, @User('id') user: string) {}
+  upVoteIdeas(@Param('id') id: string, @User('id') user) {
+    return this.ideaService.upvote(id, user.id);
+  }
 
-  @Post(':id/upvote')
+  @Post(':id/downvote')
   @UseGuards(new AuthGuard())
-  DownVoteIdeas(@Param('id') id: string, @User('id') user: string) {}
+  DownVoteIdeas(@Param('id') id: string, @User('id') user) {
+    return this.ideaService.downvote(id, user.id);
+  }
 
   @Post(':id/boomark')
   @UseGuards(new AuthGuard())
