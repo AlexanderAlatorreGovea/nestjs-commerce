@@ -17,7 +17,7 @@ export class IdeaService {
 
   async showAll(): Promise<IdeaResponse[]> {
     const ideas = await this.ideaRepository.find({
-      relations: ['author'],
+      relations: ['author', 'upvotes', 'downvotes'],
     });
     const ideasWithOmittedUserToken = ideas.map((idea) =>
       this.ideaToResponseObject(idea),
@@ -97,12 +97,20 @@ export class IdeaService {
   private ideaToResponseObject(idea: IdeaEntity): IdeaResponse {
     const author = idea.author ? idea.author.toResponseObject(false) : null;
 
-    const sanitizedResponse = {
+    const responseObject: any = {
       ...idea,
       author,
-    } as IdeaResponse;
+    };
 
-    return sanitizedResponse;
+    if (idea.upvotes) {
+      responseObject.upvotes = idea.upvotes.length;
+    }
+
+    if (idea.downvotes) {
+      responseObject.downvotes = idea.downvotes.length;
+    }
+
+    return responseObject;
   }
 
   private ensureOwnership(idea: IdeaEntity, userId: string) {
@@ -110,5 +118,58 @@ export class IdeaService {
     if (id !== userId) {
       throw new HttpException('Incorrect User', HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  async bookmark(id: string, userId: string) {
+    const idea = await this.ideaRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['bookmarks'],
+    });
+
+    const bookmarkedIdea = user.bookmarks.filter(
+      (bookmark) => bookmark.id === idea.id,
+    ).length;
+
+    if (!bookmarkedIdea) {
+      user.bookmarks.push(idea);
+
+      await this.userRepository.save(user);
+    } else {
+      throw new HttpException(
+        'Idea already bookmarked',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return user.toResponseObject();
+  }
+
+  async unBookmark(id: string, userId: string) {
+    const idea = await this.ideaRepository.findOne({
+      where: { id },
+    });
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['bookmarks'],
+    });
+    const existingBookmark = user.bookmarks.filter(
+      (bookmark) => bookmark.id === idea.id,
+    ).length;
+
+    if (existingBookmark) {
+      user.bookmarks = user.bookmarks.filter(
+        (bookmark) => bookmark.id !== idea.id,
+      );
+
+      await this.userRepository.save(user);
+    } else {
+      throw new HttpException(
+        'Idea already bookmarked',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return user.toResponseObject();
   }
 }

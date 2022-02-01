@@ -1,7 +1,7 @@
 ### Find all users
 GET http://localhost:4000/api/users
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyOTEzYjMyLWU5MWEtNDgyNi04MzM5LTg1NTIzYzI1ODlmYiIsInVzZXJuYW1lIjoidXNlcm5hbWU0IiwiaWF0IjoxNjQzNTEyODE1LCJleHAiOjE2NDQxMTc2MTV9.wG4j74CsteThkWUcKRgFjsuH_mC6NZkx-FCowGCD1p4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
 ### login user
 POST http://localhost:4000/login

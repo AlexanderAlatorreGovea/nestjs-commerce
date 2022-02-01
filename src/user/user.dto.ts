@@ -19,5 +19,5 @@ export class UserResponse {
 export class UserResponseWithAddedProperties extends UserResponse {
   ideas?: IdeaEntity[];
   token?: string;
-  bookmarks?: IdeaEntity;
+  bookmarks?: IdeaEntity[];
 }

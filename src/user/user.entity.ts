@@ -42,7 +42,7 @@ export class UserEntity {
     cascade: true,
   })
   @JoinTable()
-  bookmarsk: IdeaEntity;
+  bookmarks: IdeaEntity[];
 
   toResponseObject(showToken: boolean = true): UserResponse {
     const { id, created, username, token } = this;
@@ -58,6 +58,10 @@ export class UserEntity {
 
     if (this.ideas) {
       responseObject.ideas = this.ideas;
+    }
+
+    if(this.bookmarks) {
+      responseObject.bookmarks = this.bookmarks
     }
 
     return responseObject;

@@ -42,4 +42,5 @@ export class IdeaEntity {
   })
   @JoinTable()
   downvotes: UserEntity[];
+
 }

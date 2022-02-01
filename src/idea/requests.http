@@ -1,5 +1,5 @@
 ### Find a particular idea with a given ID
-GET http://localhost:4000/api/ideas/ce3a426e-4cf7-48d6-9c5a-4ece74c5c255
+GET http://localhost:4000/api/ideas/7944df83-5ead-4d0d-bac7-2283d47d6ccd
 
 ### Find all ideas
 GET http://localhost:4000/api/ideas
@@ -8,7 +8,7 @@ GET http://localhost:4000/api/ideas
 DELETE  http://localhost:4000/api/ideas/e1b7d00d-605e-4c31-9227-0ebb175a4d5a
  
 ### Create idea
-POST http://localhost:4000/api/ideas
+POST http://localhost:4000/api/ideas/
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
@@ -18,7 +18,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3L
 }
 
 ### Create idea
-PUT http://localhost:4000/api/ideas/e1b7d00d-605e-4c31-9227-0ebb175a4d5a
+PUT http://localhost:4000/api/7944df83-5ead-4d0d-bac7-2283d47d6ccd
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
@@ -26,4 +26,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3L
     "description": "test3"
 }
 
+### Bookmark idea
+POST http://localhost:4000/api/ideas/7944df83-5ead-4d0d-bac7-2283d47d6ccd/boomark
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 
+### Delete bookmarked idea
+DELETE http://localhost:4000/api/ideas/7944df83-5ead-4d0d-bac7-2283d47d6ccd/boomark
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
