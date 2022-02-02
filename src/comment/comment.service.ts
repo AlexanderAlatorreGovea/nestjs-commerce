@@ -22,6 +22,8 @@ export class CommentService {
       where: { id },
       relations: ['author', 'idea'],
     });
+
+    return comment
   }
 
   async create(ideaId: string, userId: string, data: CommentDTO) {
