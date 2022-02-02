@@ -6,3 +6,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3L
 {
     "comment": "test" 
 }
+
+### GET comments by idea
+GET http://localhost:4000/api/comment/368a12b1-4468-4afb-9cea-bf293bb01ef9
+
+{
+    "comment": "test" 
+}
+
+### GET user by id
+GET http://localhost:4000/api/comment/user/8ea48570-f0c8-4b0c-8c9e-998bd08f7d1d
+
+### GET user by idea
+GET http://localhost:4000/api/comment/idea/7944df83-5ead-4d0d-bac7-2283d47d6ccd
+
+### DELETE comments by idea
+DELETE http://localhost:4000/api/comment/368a12b1-4468-4afb-9cea-bf293bb01ef9
+
+{
+    "comment": "test" 
+}

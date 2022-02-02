@@ -22,8 +22,8 @@ export class CommentService {
       where: { id },
       relations: ['author', 'idea'],
     });
-
-    return comment
+    console.log('comment: ', comment);
+    return this.toResponseObject(comment);
   }
 
   async create(ideaId: string, userId: string, data: CommentDTO) {
@@ -38,7 +38,7 @@ export class CommentService {
 
     await this.commentRepository.save(comment);
 
-    return comment;
+    return this.toResponseObject(comment);
   }
 
   async destroy(id: string, userId: string) {
@@ -65,7 +65,7 @@ export class CommentService {
       relations: ['comments', 'comments.author', 'comments.idea'],
     });
 
-    return idea.comments;
+    return idea.comments.map((comment) => this.toResponseObject(comment));
   }
 
   async showByUser(id: string) {
@@ -76,6 +76,13 @@ export class CommentService {
       relations: ['author'],
     });
 
-    return comments;
+    return comments.map((comment) => this.toResponseObject(comment));
+  }
+
+  private toResponseObject(comment: CommentEntity) {
+    return {
+      ...comment,
+      author: comment.author && comment.author.toResponseObject(),
+    };
   }
 }
