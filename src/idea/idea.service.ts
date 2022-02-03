@@ -15,9 +15,11 @@ export class IdeaService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  async showAll(): Promise<IdeaResponse[]> {
+  async showAll(page: number = 1): Promise<IdeaResponse[]> {
     const ideas = await this.ideaRepository.find({
       relations: ['author', 'upvotes', 'downvotes', 'comments'],
+      take: 25,
+      skip: 25 * (page - 1),
     });
     const ideasWithOmittedUserToken = ideas.map((idea) =>
       this.ideaToResponseObject(idea),

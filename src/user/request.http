@@ -1,5 +1,5 @@
 ### Find all users
-GET http://localhost:4000/api/users
+GET http://localhost:4000/api/users?page=1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQwN2MxOGE3LTg3MWMtNDcwMS04ODNjLTI3MmYwYzQ1YzdmMCIsInVzZXJuYW1lIjoidXNlcm5hbWU0MzMiLCJpYXQiOjE2NDM2MDY0MDEsImV4cCI6MTY0NDIxMTIwMX0.fOKug3o6BP6roH1O5x4IDHyoTuuWLYV9UvxCYfpPff8
 

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -18,8 +19,8 @@ export class CommentController {
   constructor(private commentService: CommentService) {}
 
   @Get('idea/:id')
-  showCommentByIdea(@Param('id') id: string) {
-    return this.commentService.show(id);
+  showCommentByIdea(@Param('id') id: string, @Query('page') page: number) {
+    return this.commentService.showByIdea(id, page);
   }
 
   @Get('user/:id')

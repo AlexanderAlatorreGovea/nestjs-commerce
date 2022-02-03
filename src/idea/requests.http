@@ -2,7 +2,7 @@
 GET http://localhost:4000/api/ideas/a00e5f47-e5aa-4afe-b94b-3e4a0d00d397
 
 ### Find all ideas
-GET http://localhost:4000/api/ideas
+GET http://localhost:4000/api/ideas?page=1
  
 ### Delete one idea
 DELETE  http://localhost:4000/api/ideas/e1b7d00d-605e-4c31-9227-0ebb175a4d5a

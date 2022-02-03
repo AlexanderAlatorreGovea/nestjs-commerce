@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -21,8 +22,8 @@ export class IdeaController {
   constructor(private ideaService: IdeaService) {}
 
   @Get()
-  showAllIdeas() {
-    return this.ideaService.showAll();
+  showAllIdeas(@Query('page') page: number) {
+    return this.ideaService.showAll(page);
   }
 
   @Post()

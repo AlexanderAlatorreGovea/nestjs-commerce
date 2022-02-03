@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -14,10 +15,10 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get('api/users')
-  showAllUsers() {
-    return this.userService.showAll();
+  showAllUsers(@Query('page') page: number) {
+    return this.userService.showAll(page);
   }
-
+ 
   @Post('/login')
   @UsePipes(new ValidationPipe())
   login(@Body() data) {
