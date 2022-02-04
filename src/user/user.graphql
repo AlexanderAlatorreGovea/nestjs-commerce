@@ -1,8 +1,24 @@
 type User {
-  id: String!
+  id: ID!
   username: String!
+  created: DateTime!
+  ideas: [Idea!]!
+  bookmarks: [Idea!]!
+  comments: [Comment!]
+}
+
+type Auth {
+  username: String!
+  token: String!
 }
 
 type Query {
-  users: [User!]
+  users(page: Int): [User!]
+  user(username: String!): User
+  whoami: User
+}
+
+type Mutation {
+  login(username: String!, password: String!): Auth
+  register(username: String!, password: String!): Auth
 }
