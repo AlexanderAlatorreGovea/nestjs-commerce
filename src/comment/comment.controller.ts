@@ -24,8 +24,8 @@ export class CommentController {
   }
 
   @Get('user/:id')
-  showCommentByUser(@Param('id') user) {
-    return this.commentService.showByUser(user.id);
+  showCommentByUser(@Param('id') user, @Query('page') page: number) {
+    return this.commentService.showByUser(user.id, page);
   }
 
   @Post('idea/:id')

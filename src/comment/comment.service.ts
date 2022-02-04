@@ -72,12 +72,14 @@ export class CommentService {
     return comments.map((comment) => this.toResponseObject(comment));
   }
 
-  async showByUser(id: string) {
+  async showByUser(id: string, page: number = 1) {
     const comments = await this.commentRepository.find({
       where: {
         author: { id },
       },
       relations: ['author'],
+      take: 25,
+      skip: 25 * (page - 1),
     });
 
     return comments.map((comment) => this.toResponseObject(comment));

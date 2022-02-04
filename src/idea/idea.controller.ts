@@ -35,6 +35,11 @@ export class IdeaController {
     return this.ideaService.create(id, body);
   }
 
+  @Get('/newest')
+  showNewestIdeas(@Query('page') page: number) {
+    return this.ideaService.showAll(page, true)
+  }
+
   @Get(':id')
   readIdea(@Param('id') id: string) {
     return this.ideaService.read(id);
