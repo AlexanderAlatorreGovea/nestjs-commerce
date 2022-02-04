@@ -1,7 +1,7 @@
 type Idea {
   id: ID
-  created: DateTime!
-  updated: DateTime!
+  created: Int!
+  updated: Int!
   idea: String!
   description: String!
   author: User!
