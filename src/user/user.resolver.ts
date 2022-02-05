@@ -31,6 +31,7 @@ export class UserResolver {
     @Args('password') password: string,
   ) {
     const user: UserDTO = { username, password };
+    
     return await this.userService.login(user);
   }
 
