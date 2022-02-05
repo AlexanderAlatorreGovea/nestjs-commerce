@@ -33,5 +33,6 @@ import { UserModule } from './user/user.module';
       useClass: LoggingInterceptor,
     },
   ],
+  exports: [IdeaModule, UserModule, CommentModule],
 })
 export class AppModule {}
