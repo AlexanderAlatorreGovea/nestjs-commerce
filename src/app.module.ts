@@ -28,10 +28,6 @@ import { UserModule } from './user/user.module';
       provide: APP_FILTER,
       useClass: HttpErrorFilter,
     },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
   ],
   exports: [IdeaModule, UserModule, CommentModule],
 })

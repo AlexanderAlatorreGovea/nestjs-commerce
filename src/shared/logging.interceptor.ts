@@ -5,7 +5,6 @@ import {
   Logger,
   NestInterceptor,
 } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
 import { Observable, tap } from 'rxjs';
 
 const getLoggerMessage = ({ method, url, now, context }) => {
@@ -19,23 +18,6 @@ const getLoggerMessage = ({ method, url, now, context }) => {
 export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
-
-    if (!req) {
-      const ctx: any = GqlExecutionContext.create(context);
-      const resolverName = ctx.constructorRef.name;
-      const info = ctx.getInfo();
-
-      return handler
-        .handle()
-        .pipe(
-          tap(() =>
-            Logger.log(
-              `${info.parentType} "${info.fieldName}" ${Date.now() - now}ms`,
-              resolverName,
-            ),
-          ),
-        );
-    }
 
     const method = req.method;
     const url = req.url;

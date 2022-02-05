@@ -17,8 +17,10 @@ export class UserService {
       skip: 25 * (page - 1),
       take: 25,
     });
+ 
+    const userList = users.map((user) => user.toResponseObject(false));
 
-    return users.map((user) => user.toResponseObject(false));
+    return userList;
   }
 
   async login(data: UserDTO): Promise<UserResponse> {
