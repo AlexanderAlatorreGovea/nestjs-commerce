@@ -1,6 +1,6 @@
 ## Description
 
-This is a repository built to create an ecommerce website with Nestjs.
+This is a repository built to create a dummy site with Nestjs.
 
 ## Installation
 
