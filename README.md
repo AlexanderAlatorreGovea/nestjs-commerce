@@ -18,5 +18,5 @@ $ npm run start
 $ npm run start:dev
 
 # prod mode
-$ npm run start:prod
+
 ```
