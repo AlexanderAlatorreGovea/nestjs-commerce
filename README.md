@@ -1,5 +1,3 @@
 ## Description
 
-This is a repository built to create a dummy site with Nestjs.
-
-
+This is a repository built to learn Nestjs.
