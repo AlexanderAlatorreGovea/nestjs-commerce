@@ -1,3 +1,3 @@
 ## Description
 
-This is a repository built to learn Nestjs.
+This is a small project to learn Nestjs.
