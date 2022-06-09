@@ -15,8 +15,8 @@ const getLoggerMessage = ({ method, url, now, context }) => {
 };
 
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
+export class LoggingInterceptor<T> implements NestInterceptor {
+  intercept(context: ExecutionContext, handler: CallHandler): Observable<T> {
     const req = context.switchToHttp().getRequest();
 
     const method = req.method;

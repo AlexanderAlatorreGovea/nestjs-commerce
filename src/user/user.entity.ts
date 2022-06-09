@@ -30,7 +30,7 @@ export class UserEntity {
   @Column('text')
   password: string;
 
-  @OneToMany((type) => IdeaEntity, (idea) => idea.author, { cascade: true })
+  @OneToMany(() => IdeaEntity, (idea) => idea.author, { cascade: true })
   ideas: IdeaEntity[];
 
   @BeforeInsert()
@@ -38,7 +38,7 @@ export class UserEntity {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
-  @ManyToMany((type) => IdeaEntity, {
+  @ManyToMany(() => IdeaEntity, {
     cascade: true,
   })
   @JoinTable()
@@ -54,6 +54,7 @@ export class UserEntity {
 
     if (showToken) {
       responseObject.token = token;
+      return;
     }
 
     if (this.ideas) {

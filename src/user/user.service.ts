@@ -12,12 +12,13 @@ export class UserService {
   ) {}
 
   async showAll(page: number = 1): Promise<UserResponse[]> {
+    const relations = ['ideas', 'bookmarks'];
     const users = await this.userRepository.find({
-      relations: ['ideas', 'bookmarks'],
+      relations,
       skip: 25 * (page - 1),
       take: 25,
     });
- 
+
     const userList = users.map((user) => user.toResponseObject(false));
 
     return userList;
