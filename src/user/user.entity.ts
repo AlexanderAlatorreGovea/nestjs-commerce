@@ -1,3 +1,6 @@
+import * as bcrypt from 'bcryptjs';
+import { IdeaEntity } from 'idea/idea.entity';
+import * as jwt from 'jsonwebtoken';
 import {
   BeforeInsert,
   Column,
@@ -8,10 +11,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
 import { UserResponse, UserResponseWithAddedProperties } from './user.dto';
-import { IdeaEntity } from 'idea/idea.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -61,8 +61,8 @@ export class UserEntity {
       responseObject.ideas = this.ideas;
     }
 
-    if(this.bookmarks) {
-      responseObject.bookmarks = this.bookmarks
+    if (this.bookmarks) {
+      responseObject.bookmarks = this.bookmarks;
     }
 
     return responseObject;
